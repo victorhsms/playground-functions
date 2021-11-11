@@ -23,8 +23,9 @@ function splitSentence(frase) {
 }
 
 // Desafio 4
-function concatName() {
+function concatName(words) {
   // seu código aqui
+  return `${words[words.length - 1]}, ${words[0]}`;
 }
 
 // Desafio 5
