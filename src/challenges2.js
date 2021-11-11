@@ -5,7 +5,8 @@ function techList(techs, name) {
     return 'Vazio!';
   }
   techs.sort()
-  //Pesquisando por "organizar o array em ordem alfabetica javascript" no Google, encontrei a explicação do método '.sort()' no Javascript no link: https://ricardo-reis.medium.com/o-m%C3%A9todo-sort-do-array-javascript-482576734e0a#:~:text=Para%20ordenar%20esse%20array%20em,para%20o%20m%C3%A9todo%20sort()%20 e usei no código acima.
+  //Pesquisando por "organizar o array em ordem alfabetica javascript" no Google, encontrei a explicação do método '.sort()' no Javascript no link abaixo e usei no código acima.
+  // ref: https://ricardo-reis.medium.com/o-m%C3%A9todo-sort-do-array-javascript-482576734e0a#:~:text=Para%20ordenar%20esse%20array%20em,para%20o%20m%C3%A9todo%20sort()%20
   let saida = [];
   for (let tech in techs) {
     saida[tech] = {'tech':techs[tech],'name':name};
@@ -53,13 +54,25 @@ function generatePhoneNumber(numbers) {
 }
 
 // Desafio 12
-function triangleCheck() {
+function triangleCheck(lineA, lineB, lineC) {
   // seu código aqui
+  //Aprendi sobre Math.abs() no link abaixo:
+  // ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
+  if (lineA > lineB + lineC || lineA < Math.abs(lineB - lineC)) {
+    return false;
+  } else if (lineB > lineA + lineC || lineB < Math.abs(lineA - lineC)) {
+    return false;
+  } else if (lineC > lineA + lineB || lineC < Math.abs(lineA - lineB)) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 // Desafio 13
-function hydrate() {
+function hydrate(words) {
   // seu código aqui
+  
 }
 
 module.exports = {

@@ -136,7 +136,8 @@ function fizzBuzz(numbers) {
 
 // Desafio 9
 //Observação sobre o exercícios 9 e o uso de Expressões Regulares (RegExp). Expressões Regulares é uma forma de se encontrar um conjunto de caracteres em todo um string. Dentro de um método replace, ele substitui o conjunto de caracteres que estava procurando pelo informado. O motivo de eu ter usado Expressão Regular foi pela flag 'g', que realiza a substituição em toda extenção da string (não apenas no primeiro caracter encontrado), visto que não encontrei uma forma de usar a flag com o replace puro, sem o uso de Expressão Regular.
-// Eu aprendi expressões Regulares no curso da Alura "Expressões Regulares: Capturando textos de forma mágica", no conteúdo 7 "7. Usando regex nas diversas linguagens" e na aula "Regex com Javascript". Link do curso: https://www.alura.com.br/curso-online-expressoes-regulares
+// Eu aprendi expressões Regulares no curso da Alura "Expressões Regulares: Capturando textos de forma mágica", no conteúdo 7 "7. Usando regex nas diversas linguagens" e na aula "Regex com Javascript". Link do curso abaixo:
+// ref: https://www.alura.com.br/curso-online-expressoes-regulares
 function encode(frase) {
   // seu código aqui
   frase = frase.replace(new RegExp('a', 'g'),'1');
