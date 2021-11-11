@@ -118,17 +118,46 @@ function catAndMouse(mouse, cat1, cat2) {
 }
 
 // Desafio 8
-function fizzBuzz() {
-  // seu código aqui
+function fizzBuzz(numbers) {
+  //seu código aqui
+  for (number in numbers) {
+    if (numbers[number] % 3 == 0 && numbers[number] % 5 == 0) {
+      numbers[number] = 'fizzBuzz';
+    } else if (numbers[number] % 3 == 0) {
+      numbers[number] = 'fizz';
+    } else if (numbers[number] % 5 == 0) {
+      numbers[number] = 'buzz';
+    } else {
+      numbers[number] = 'bug!';
+    }
+  }
+  return numbers;
 }
 
 // Desafio 9
-function encode() {
+//Observação sobre o exercícios 9 e o uso de Expressões Regulares (RegExp). Expressões Regulares é uma forma de se encontrar um conjunto de caracteres em todo um string. Dentro de um método replace, ele substitui o conjunto de caracteres que estava procurando pelo informado. O motivo de eu ter usado Expressão Regular foi pela flag 'g', que realiza a substituição em toda extenção da string (não apenas no primeiro caracter encontrado), visto que não encontrei uma forma de usar a flag com o replace puro, sem o uso de Expressão Regular.
+// Eu aprendi expressões Regulares no curso da Alura "Expressões Regulares: Capturando textos de forma mágica", no conteúdo 7 "7. Usando regex nas diversas linguagens" e na aula "Regex com Javascript". Link do curso: https://www.alura.com.br/curso-online-expressoes-regulares
+function encode(frase) {
   // seu código aqui
+  frase = frase.replace(new RegExp('a', 'g'),'1');
+  frase = frase.replace(new RegExp('e', 'g'),'2');
+  frase = frase.replace(new RegExp('i', 'g'),'3');
+  frase = frase.replace(new RegExp('o', 'g'),'4');
+  frase = frase.replace(new RegExp('u', 'g'),'5');
+
+  return frase;
 }
-function decode() {
+function decode(frase) {
   // seu código aqui
+  frase = frase.replace(new RegExp('1', 'g'),'a');
+  frase = frase.replace(new RegExp('2', 'g'),'e');
+  frase = frase.replace(new RegExp('3', 'g'),'i');
+  frase = frase.replace(new RegExp('4', 'g'),'o');
+  frase = frase.replace(new RegExp('5', 'g'),'u');
+
+  return frase;
 }
+
 
 module.exports = {
   calcArea,
@@ -142,5 +171,3 @@ module.exports = {
   highestCount,
   splitSentence,
 };
-
-// catAndMouse(10, 4, 22);
