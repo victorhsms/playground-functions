@@ -64,8 +64,57 @@ function highestCount(numbers) {
 }
 
 // Desafio 7
-function catAndMouse() {
+function catAndMouse(mouse, cat1, cat2) {
   // seu código aqui
+  // caso atípico, em que o rato está no meio do percurso
+  if (cat1 > mouse && cat2 < mouse || cat2 > mouse && cat1 < mouse) {
+    let count1 = 0;
+    let count2 = 0;
+
+    //estou verificando a diferença entre os dois ratos sobre o mouse. No primeiro if considerando que o gato ta na frente do rato e no segundo if considerando que o gato está atrás do rato.
+    if (cat1 < cat2) {
+      while (cat1 != mouse) {
+        cat1 += 1;
+        count1 += 1;
+      }
+      while (cat2 != mouse) {
+        cat2 -= 1;
+        count2 += 1;
+      }
+      if (count1 < count2) {
+        return "cat1";
+      } else if (count2 < count1) {
+        return "cat2";
+      } else {
+        return "os gatos trombam e o rato foge";
+      }
+    } else {
+      while (cat1 == mouse) {
+        cat1 -= 1;
+        count1 += 1;
+      }
+      while (cat2 == mouse) {
+        cat2 += 1;
+        count2 += 1;
+      }
+      if (count1 < count2) {
+        return "cat1";
+      } else if (count2 < count1) {
+        return "cat2";
+      } else {
+        return "os gatos trombam e o rato foge";
+      }
+    }
+
+  }
+  //caso comum
+  if (cat1 < cat2) {
+    return "cat1";
+  } else if (cat2 < cat1) {
+    return "cat2";
+  } else {
+    return "os gatos trombam e o rato foge";
+  }
 }
 
 // Desafio 8
@@ -93,3 +142,5 @@ module.exports = {
   highestCount,
   splitSentence,
 };
+
+// catAndMouse(10, 4, 22);
