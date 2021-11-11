@@ -72,7 +72,21 @@ function triangleCheck(lineA, lineB, lineC) {
 // Desafio 13
 function hydrate(words) {
   // seu código aqui
-  
+  // Na Expressão Regular abaixo (ver Desafio 9 desse projeto para uma explicação sobre como aprendi Regex) o '\d' significa qualquer dígito entre 0 e 9 e o '+' significa que pode ter mais de 1 número junto (isso evita que haja distorção no valor final caso seja pego apenas a unidade e seja ignorado as dezenas ou centenas). A flag 'g' faz com que seja procurado por toda extenção da string e não apenas na primeira ocasião que encontrar um dígito. O método '.match()' retorna o valor que correspondeu a busca da Expressão Regular. Além disso, 'parseInt()' converte uma string em um número inteiro (pra ser feito uma soma no lugar de concatenação).
+  // ref: https://stackoverflow.com/questions/1623221/how-to-find-a-number-in-a-string-using-javascript
+  // ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/match
+  // ref: https://www.alura.com.br/artigos/convertendo-string-para-numero-em-javascript?gclid=CjwKCAiAm7OMBhAQEiwArvGi3LkqA7NL66BUT4Cx1xfgZsmJl7pz53IHwG4You0IAWwr27yBj3QcohoC2BIQAvD_BwE
+  let water = words.match(/\d+/g);
+  console.log(water);
+  let count = 0; 
+  for (let number in water) {
+    count += parseInt(water[number]);
+  }
+  if (count == 1) {
+    return `${count} copo de água`;
+  } else {
+    return `${count} copos de água`;
+  }
 }
 
 module.exports = {

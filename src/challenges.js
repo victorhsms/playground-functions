@@ -135,26 +135,27 @@ function fizzBuzz(numbers) {
 }
 
 // Desafio 9
-//Observação sobre o exercícios 9 e o uso de Expressões Regulares (RegExp). Expressões Regulares é uma forma de se encontrar um conjunto de caracteres em todo um string. Dentro de um método replace, ele substitui o conjunto de caracteres que estava procurando pelo informado. O motivo de eu ter usado Expressão Regular foi pela flag 'g', que realiza a substituição em toda extenção da string (não apenas no primeiro caracter encontrado), visto que não encontrei uma forma de usar a flag com o replace puro, sem o uso de Expressão Regular.
+//Observação sobre o exercícios 9 e o uso de Expressões Regulares (RegExp ou apenas Regex). Expressões Regulares é uma forma de se encontrar um conjunto de caracteres em todo um string. Dentro de um método replace, ele substitui o conjunto de caracteres que estava procurando pelo informado. O motivo de eu ter usado Expressão Regular foi pela flag 'g', que realiza a substituição em toda extenção da string (não apenas no primeiro caracter encontrado), visto que não encontrei uma forma de usar a flag com o replace puro, sem o uso de Expressão Regular.
 // Eu aprendi expressões Regulares no curso da Alura "Expressões Regulares: Capturando textos de forma mágica", no conteúdo 7 "7. Usando regex nas diversas linguagens" e na aula "Regex com Javascript". Link do curso abaixo:
 // ref: https://www.alura.com.br/curso-online-expressoes-regulares
+// ref: https://www.w3schools.com/js/js_string_methods.asp
 function encode(frase) {
   // seu código aqui
-  frase = frase.replace(new RegExp('a', 'g'),'1');
-  frase = frase.replace(new RegExp('e', 'g'),'2');
-  frase = frase.replace(new RegExp('i', 'g'),'3');
-  frase = frase.replace(new RegExp('o', 'g'),'4');
-  frase = frase.replace(new RegExp('u', 'g'),'5');
+  frase = frase.replace(/a/g,'1');
+  frase = frase.replace(/e/g,'2');
+  frase = frase.replace(/i/g,'3');
+  frase = frase.replace(/o/g,'4');
+  frase = frase.replace(/u/g,'5');
 
   return frase;
 }
 function decode(frase) {
   // seu código aqui
-  frase = frase.replace(new RegExp('1', 'g'),'a');
-  frase = frase.replace(new RegExp('2', 'g'),'e');
-  frase = frase.replace(new RegExp('3', 'g'),'i');
-  frase = frase.replace(new RegExp('4', 'g'),'o');
-  frase = frase.replace(new RegExp('5', 'g'),'u');
+  frase = frase.replace(/1/g,'a');
+  frase = frase.replace(/2/g,'e');
+  frase = frase.replace(/3/g,'i');
+  frase = frase.replace(/4/g,'o');
+  frase = frase.replace(/5/g,'u');
 
   return frase;
 }
