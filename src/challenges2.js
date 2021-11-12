@@ -1,3 +1,71 @@
+// Funções auxiliares
+const phoneNumber = {
+  commonCase(numbers) {
+    let telNumber = '';
+    for (let i = 0; i < numbers.length; i += 1) {
+      if (i === 0) {
+        telNumber += '(';
+      } else if (i === 2) {
+        telNumber += ') ';
+      } else if (i === 7) {
+        telNumber += '-';
+      }
+      telNumber += `${numbers[i]}`;
+    }
+
+    return telNumber;
+  },
+  countCase(count, retorno) {
+    for (let i = 0; i < count.length; i += 1) {
+      if (count[i] >= 3) {
+        retorno = 'não é possível gerar um número de telefone com esses valores';
+      }
+    }
+    return retorno;
+  },
+  atypicalCase(numbers) {
+    let count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let retorno = '';
+    for (let i = 0; i < numbers.length; i += 1) {
+      if (numbers[i] < 0 || numbers[i] > 9) {
+        retorno = 'não é possível gerar um número de telefone com esses valores';
+      }
+      count[numbers[i]] += 1;
+    }
+    retorno = phoneNumber.countCase(count, retorno);
+
+    return retorno;
+  },
+};
+const calcTriangle = {
+  // Ver se o lado do triângulo é maior que o valor absoluto da diferença entre os outros dois lados.
+  absolute(lineA, lineB, lineC, retorno) {
+    let condition1 = lineA < Math.abs(lineB - lineC);
+    let condition2 = lineB < Math.abs(lineA - lineC);
+    let condition3 = lineC < Math.abs(lineA - lineB);
+
+    if (condition1 || condition2 || condition3) {
+      retorno = false;
+    }
+
+    return retorno;
+  },
+
+  // Ver se a medida de qualquer um dos lados do  triangulo é menor que a soma das medidas dos outros dois lados.
+  sumTriangle(lineA, lineB, lineC, retorno) {
+    let condition1 = lineA > lineB + lineC;
+    let condition2 = lineB > lineA + lineC;
+    let condition3 = lineC > lineA + lineB;
+
+    if (condition1 || condition2 || condition3) {
+      retorno = false;
+    }
+
+    return retorno;
+  },
+};
+
+// Funções do projeto
 // Desafio 10
 function techList(tech, name) {
   // seu código aqui
@@ -22,33 +90,13 @@ function generatePhoneNumber(numbers) {
     return 'Array com tamanho incorreto.';
   }
   // Caso algum valor do array seja menor que 0, maior que 9 ou se repita mais de 3 vezes:
-  let count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  for (let i = 0; i < numbers.length; i += 1) {
-    if (numbers[i] < 0 || numbers[i] > 9) {
-      return 'não é possível gerar um número de telefone com esses valores';
-    }
-    count[numbers[i]] += 1;
-  }
-  for (let i = 0; i < count.length; i += 1) {
-    if (count[i] >= 3) {
-      return 'não é possível gerar um número de telefone com esses valores';
-    }
+  let exit = phoneNumber.atypicalCase(numbers);
+  if (exit !== '') {
+    return exit;
   }
 
   // Caso tudo esteja conforme o enunciado pede:
-  let telNumber = '';
-  for (let i = 0; i < numbers.length; i += 1) {
-    if (i === 0) {
-      telNumber += '(';
-    }
-    if (i === 2) {
-      telNumber += ') ';
-    }
-    if (i === 7) {
-      telNumber += '-';
-    }
-    telNumber += `${numbers[i]}`;
-  }
+  let telNumber = phoneNumber.commonCase(numbers);
 
   return telNumber;
 }
@@ -59,14 +107,11 @@ function triangleCheck(lineA, lineB, lineC) {
   // Aprendi sobre Math.abs() no link abaixo:
   // ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
   let retorno = true;
-  if (lineA > lineB + lineC || lineA < Math.abs(lineB - lineC)) {
+  let condition1 = calcTriangle.absolute(lineA, lineB, lineC, retorno);
+  let condition2 = calcTriangle.sumTriangle(lineA, lineB, lineC, retorno);
+
+  if (!(condition1) || !(condition2)) {
     retorno = false;
-  } else if (lineB > lineA + lineC || lineB < Math.abs(lineA - lineC)) {
-    retorno = false;
-  } else if (lineC > lineA + lineB || lineC < Math.abs(lineA - lineB)) {
-    retorno = false;
-  } else {
-    retorno = true;
   }
 
   return retorno;

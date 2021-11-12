@@ -1,4 +1,74 @@
-// Funções extras!
+// Funções auxiliares!
+const highLevelNumbers = {
+  negativeNumbers(highNumber, numbers, initialValue) {
+    highNumber = initialValue;
+    for (let number in numbers) {
+      if (highNumber < numbers[number]) {
+        highNumber = numbers[number];
+      }
+    }
+    return highNumber;
+  },
+  counterNumber(numbers, count, highNumber) {
+    for (let number in numbers) {
+      if (numbers[number] === highNumber) {
+        count += 1;
+      }
+    }
+
+    return count;
+  },
+};
+
+const mouseScaped = {
+  baseFunction(cat1, cat2, retorno) {
+    if (cat1 < cat2) {
+      retorno = 'cat1';
+    } else if (cat2 < cat1) {
+      retorno = 'cat2';
+    } else {
+      retorno = 'os gatos trombam e o rato foge';
+    }
+
+    return retorno;
+  },
+  moduleCats(cat1, cat2, mouse, retorno) {
+    let count1 = 0;
+    let count2 = 0;
+    while (cat1 !== mouse) {
+      cat1 += 1;
+      count1 += 1;
+    }
+    while (cat2 !== mouse) {
+      cat2 -= 1;
+      count2 += 1;
+    }
+    retorno = mouseScaped.baseFunction(count1, count2, retorno);
+
+    return retorno;
+  },
+  farCat(cat1, cat2) {
+    let cat = 0;
+    if (cat1 > cat2) {
+      cat = cat1;
+    } else {
+      cat = cat2;
+    }
+
+    return cat;
+  },
+  nearCat(cat1, cat2) {
+    let cat = 0;
+    if (cat1 < cat2) {
+      cat = cat1;
+    } else {
+      cat = cat2;
+    }
+
+    return cat;
+  },
+};
+
 function Desafio8(numero) {
   if (numero % 3 === 0 && numero % 5 === 0) {
     numero = 'fizzBuzz';
@@ -13,6 +83,7 @@ function Desafio8(numero) {
   return numero;
 }
 
+// Funções do projeto
 // Desafio 1
 function compareTrue(valor1, valor2) {
   // seu código aqui
@@ -64,74 +135,30 @@ function highestCount(numbers) {
   }
   // Se todos os números forem negativos, a variável com o maior número pega o valor do primeiro índice do array e procura um valor maior entre os outros índices.
   if (highNumber === 0) {
-    highNumber = numbers[0];
-    for (let number in numbers) {
-      if (highNumber < numbers[number]) {
-        highNumber = numbers[number];
-      }
-    }
+    highNumber = highLevelNumbers.negativeNumbers(highNumber, numbers, numbers[0]);
   }
   // Contando quantas vezes se repete o maior número no array.
-  for (let number in numbers) {
-    if (numbers[number] === highNumber) {
-      count += 1;
-    }
-  }
+  count = highLevelNumbers.counterNumber(numbers, count, highNumber);
   return count;
 }
 
 // Desafio 7
 function catAndMouse(mouse, cat1, cat2) {
   // seu código aqui
-  // caso atípico, em que o rato está no meio do percurso
-  if (cat1 > mouse && cat2 < mouse || cat2 > mouse && cat1 < mouse) {
-    let count1 = 0;
-    let count2 = 0;
+  let retorno = '';
+  // variáveis a seguir apenas para ver qual o gato com maior número e qual está com o menor para completar o IF a seguir.
+  let far = parseInt(mouseScaped.farCat(cat1, cat2), 10);
+  let near = parseInt(mouseScaped.nearCat(cat1, cat2), 10);
 
-    // estou verificando a diferença entre os dois ratos sobre o mouse. No primeiro if considerando que o gato ta na frente do rato e no segundo if considerando que o gato está atrás do rato.
-    if (cat1 < cat2) {
-      while (cat1 !== mouse) {
-        cat1 += 1;
-        count1 += 1;
-      }
-      while (cat2 !== mouse) {
-        cat2 -= 1;
-        count2 += 1;
-      }
-      if (count1 < count2) {
-        return 'cat1';
-      } else if (count2 < count1) {
-        return 'cat2';
-      } else {
-        return 'os gatos trombam e o rato foge';
-      }
-    } else {
-      while (cat1 === mouse) {
-        cat1 -= 1;
-        count1 += 1;
-      }
-      while (cat2 === mouse) {
-        cat2 += 1;
-        count2 += 1;
-      }
-      if (count1 < count2) {
-        return 'cat1';
-      } else if (count2 < count1) {
-        return 'cat2';
-      } else {
-        return 'os gatos trombam e o rato foge';
-      }
-    }
-
-  }
-  // caso comum
-  if (cat1 < cat2) {
-    return 'cat1';
-  } else if (cat2 < cat1) {
-    return 'cat2';
+  if (mouse > far || mouse < near) {
+    // caso comum
+    retorno = mouseScaped.baseFunction(cat1, cat2, retorno);
   } else {
-    return 'os gatos trombam e o rato foge';
+    // caso atípico, em que o rato está no meio do percurso
+    retorno = mouseScaped.moduleCats(cat1, cat2, mouse, retorno);
   }
+
+  return retorno;
 }
 
 // Desafio 8
